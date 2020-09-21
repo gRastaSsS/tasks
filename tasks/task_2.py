@@ -265,6 +265,14 @@ def sub_task_1():
         print('g', r_g, y_g, f_g, it_g)
         print('\n')
 
+        #x = np.linspace(boundaries[0], boundaries[1], 1000)
+        #y = fun(x)
+        #plt.plot(x, y)
+        #plt.plot([r_d], [y_d], marker='o', markersize=3, color="blue")
+        #plt.plot([r_g], [y_g], marker='o', markersize=3, color="yellow")
+        #plt.plot([r_es], [y_es], marker='o', markersize=3, color="red")
+        #plt.show()
+
 
 def sub_task_2():
     x_exp, y_exp = generate_linear_noisy_data(100)
@@ -284,5 +292,5 @@ def sub_task_2():
 
 
 if __name__ == '__main__':
-    #sub_task_1()
-    sub_task_2()
+    sub_task_1()
+    #sub_task_2()
