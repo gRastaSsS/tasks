@@ -102,9 +102,9 @@ def gauss(fun, e, initial=None, boundaries=None):
 
 def nelder_mead(fun, e, alpha=1, beta=0.5, gamma=2, initial=None):
     if initial is None:
-        x_1 = np.array([-2, -2])
-        x_2 = np.array([2, 2])
-        x_3 = np.array([2, -2])
+        x_1 = np.array([0, 0])
+        x_2 = np.array([1, 0])
+        x_3 = np.array([0, 1])
     else:
         x_1, x_2, x_3 = initial
 
@@ -292,5 +292,5 @@ def sub_task_2():
 
 
 if __name__ == '__main__':
-    sub_task_1()
-    #sub_task_2()
+    #sub_task_1()
+    sub_task_2()
