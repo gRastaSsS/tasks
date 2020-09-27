@@ -18,7 +18,7 @@ def approx_fun_2(x, a, b):
     return a / (1 + b * new_x)
 
 
-def least_squares(x, y, approx_fun, search_fun, e=0.001):
+def least_squares_fun(x, y, approx_fun, search_fun, e=0.001):
     return search_fun(lambda a, b: np.sum((approx_fun(x, a, b) - y) ** 2), e)
 
 
@@ -278,9 +278,9 @@ def sub_task_2():
     x_exp, y_exp = generate_linear_noisy_data(100)
 
     for a_fun, name in [(approx_fun_1, 'Linear approximation'), (approx_fun_2, 'Rational approximation')]:
-        a_es, b_es, _ = least_squares(x_exp, y_exp, a_fun, exhaustive_search_2)
-        a_ga, b_ga, _ = least_squares(x_exp, y_exp, a_fun, gauss)
-        a_nm, b_nm, _ = least_squares(x_exp, y_exp, a_fun, nelder_mead)
+        a_es, b_es, _ = least_squares_fun(x_exp, y_exp, a_fun, exhaustive_search_2)
+        a_ga, b_ga, _ = least_squares_fun(x_exp, y_exp, a_fun, gauss)
+        a_nm, b_nm, _ = least_squares_fun(x_exp, y_exp, a_fun, nelder_mead)
 
         plt.plot(x_exp, y_exp, label="Experimental")
         plt.plot(x_exp, a_fun(x_exp, a_nm, b_nm), label="Nelder-Mead")
