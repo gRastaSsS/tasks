@@ -1,6 +1,7 @@
 import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import sys
 
 from networkx.generators.random_graphs import dense_gnm_random_graph
 
@@ -79,7 +80,12 @@ if __name__ == '__main__':
     nx.draw_networkx(graph, node_size=10, with_labels=True, font_size=10, node_color='#000000')
     plt.show()
 
+    np.set_printoptions(threshold=sys.maxsize)
+
+    print(adj_matrix)
+    print(adj_list)
+
     comps = find_components(adj_list)
     shortest = shortest_path(adj_list, 0, 6)
-    print(comps)
-    print(shortest)
+    print("Components", comps)
+    print("Shortest", shortest)
