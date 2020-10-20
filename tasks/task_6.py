@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import heapdict
+import time
 
 from networkx import dense_gnm_random_graph
 
@@ -26,7 +27,7 @@ def generate_grid(linear_size=10, obstacles=30):
         for j in range(linear_size):
             if i == 0 and j == 0:
                 continue
-            if i == linear_size-1 and j == linear_size-1:
+            if i == linear_size - 1 and j == linear_size - 1:
                 continue
 
             free_cells.add((i, j))
@@ -167,13 +168,34 @@ def a_star(grid, start, goal, h):
     return None
 
 
-if __name__ == '__main__':
-    # g_1 = generate_graph()
-    # dist_djikstra, _ = djikstra(g_1, 0)
-    # dist_bellman_ford, _ = bellman_ford(g_1, 0)
-    # print(dist_djikstra)
-    # print(dist_bellman_ford)
-    g_2 = generate_grid()
-    print(g_2)
-    print(a_star(g_2, (0, 0), (g_2.shape[0]-1, g_2.shape[1]-1), lambda a, b: abs(a[0] - b[0]) + abs(a[1] - b[1])))
+def black_hole(arg):
+    return
 
+
+def dummy_benchmark(fun, data, runs):
+    t1 = time.perf_counter_ns()
+    for _ in range(runs):
+        black_hole(fun(**data))
+    t2 = time.perf_counter_ns()
+    return (t2 - t1) / runs
+
+
+if __name__ == '__main__':
+    g_1 = generate_graph()
+
+    print("djikstra_average_time_ns", dummy_benchmark(djikstra, {'adj_matrix': g_1, 'v0': 0}, 10))
+    print("bellman_average_time_ns", dummy_benchmark(bellman_ford, {'adj_matrix': g_1, 'v0': 0}, 10))
+
+    g_2 = generate_grid()
+    for i in range(5):
+        params = {
+            'grid': g_2,
+            'start': (i, 0),
+            'goal': (g_2.shape[0] - 1, g_2.shape[1] - 1),
+            'h': lambda a, b: abs(a[0] - b[0]) + abs(a[1] - b[1])
+        }
+
+        print("a_star_average_time_ns", i, dummy_benchmark(a_star, params, 20))
+
+    # print(g_2)
+    # print(a_star(g_2, (0, 0), (g_2.shape[0] - 1, g_2.shape[1] - 1), lambda a, b: abs(a[0] - b[0]) + abs(a[1] - b[1])))
