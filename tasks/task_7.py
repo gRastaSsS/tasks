@@ -13,7 +13,3 @@ def wiki_data_to_csv(input_path, output_path):
             if not line.startswith('#'):
                 elements = list(map(lambda s: re.sub('\\D', '', s), line.split('\t')))
                 writer.writerow(elements)
-
-
-if __name__ == '__main__':
-    wiki_data_to_csv('C:\\Projects\\algorithms-8-tasks\\resources\\task-7\\Wiki-Vote.txt', 'wiki.csv')
